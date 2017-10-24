@@ -27,4 +27,8 @@ Run the fixer on save?
 
 ---
 
+## Known Issues:
+- Doesn't automatically reload config file on VS Code configuration change
+- Error messages lacking
+
 \- Enjoy!
