@@ -12,6 +12,7 @@
         "url": "https://github.com/calebporzio/simple-php-cs-fixer.git"
     },
     "categories": [
+        "Linters",
         "Other"
     ],
     "activationEvents": [
