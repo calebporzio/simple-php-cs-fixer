@@ -23,7 +23,7 @@
         "commands": [
             {
                 "command": "simple-php-cs-fixer.fix",
-                "title": "Fire PHP CS Fixer"
+                "title": "Simple PHP CS Fixer: Fix"
             }
         ],
         "configuration": {
