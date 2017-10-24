@@ -1,0 +1,62 @@
+{
+    "name": "simple-php-cs-fixer",
+    "displayName": "Simple PHP CS Fixer",
+    "description": "A simple way to fire php-cs-fixer on save",
+    "version": "0.0.1",
+    "publisher": "calebporzio",
+    "engines": {
+        "vscode": "^1.17.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/calebporzio/simple-php-cs-fixer.git"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "simple-php-cs-fixer.fix",
+                "title": "Fire PHP CS Fixer"
+            }
+        ],
+        "configuration": {
+            "title": "Simple PHP CS Fixer Config",
+            "type": "object",
+            "properties": {
+                "simple-php-cs-fixer.useConfig": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Weather or not to use a custom config file"
+                },
+                "simple-php-cs-fixer.config": {
+                    "type": "string",
+                    "default": ".php_cs.dist",
+                    "description": "PHP CS Fixer custom config file name"
+                },
+                "simple-php-cs-fixer.save": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Run PHP CS Fixer on save"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.5.2",
+        "vscode": "^1.1.5",
+        "mocha": "^3.5.0",
+        "eslint": "^4.6.1",
+        "@types/node": "^7.0.0",
+        "@types/mocha": "^2.2.42"
+    }
+}
