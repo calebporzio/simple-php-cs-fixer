@@ -3,7 +3,7 @@
     "displayName": "Simple PHP CS Fixer",
     "description": "A simple way to fire php-cs-fixer with custom config and optionally on save.",
     "icon": "icon.png",
-    "version": "0.1.1",
+    "version": "0.1.3",
     "publisher": "calebporzio",
     "engines": {
         "vscode": "^1.17.0"
