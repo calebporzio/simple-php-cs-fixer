@@ -2,8 +2,10 @@ const vscode = require('vscode');
 const cp = require('child_process');
 const fs = require('fs');
 
+let willFixOnSave = undefined;
+
 function PhpCsFixer() {
-    this.loadConfig();
+    //
 }
 
 PhpCsFixer.prototype.fix = function (document) {
@@ -63,22 +65,25 @@ PhpCsFixer.prototype.loadConfig = function () {
     this.useConfigFile = config.get('useConfig');
     this.configFile = config.get('config');
     this.runOnSave = config.get('save');
+
+    if (this.runOnSave && ! willFixOnSave) {
+        willFixOnSave = vscode.workspace.onDidSaveTextDocument(document => {
+            this.fix(document);
+        });
+    } else if (!this.runOnSave && willFixOnSave) {
+        willFixOnSave.dispose();
+        willFixOnSave = undefined;
+    }
 }
 
 function activate(context) {
     const phpCsFixer = new PhpCsFixer;
 
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
-        const disposeStatus = vscode.window.showStatusMessage('Simple PHP CS Fixer: Reloading config.');
         phpCsFixer.loadConfig();
-        disposeStatus.dispose();
     }));
 
-    if (phpCsFixer.runOnSave) {
-        vscode.workspace.onDidSaveTextDocument(document => {
-            phpCsFixer.fix(document);
-        });
-    }
+    phpCsFixer.loadConfig();
 
     vscode.commands.registerTextEditorCommand('simple-php-cs-fixer.fix', (textEditor) => {
         phpCsFixer.fix(textEditor.document);
@@ -87,5 +92,9 @@ function activate(context) {
 exports.activate = activate;
 
 function deactivate() {
+    if (willFixOnSave) {
+        willFixOnSave.dispose();
+        willFixOnSave = undefined;
+    }
 }
 exports.deactivate = deactivate;
