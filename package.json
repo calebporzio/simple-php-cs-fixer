@@ -28,7 +28,7 @@
         "commands": [
             {
                 "command": "simple-php-cs-fixer.fix",
-                "title": "Simple PHP CS Fixer: Fix"
+                "title": "Simple PHP CS Fixer: fix"
             }
         ],
         "configuration": {

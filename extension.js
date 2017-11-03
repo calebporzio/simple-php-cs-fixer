@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const cp = require('child_process');
 const fs = require('fs');
+const path = require('path');
 
 let willFixOnSave = undefined;
 
@@ -22,7 +23,7 @@ PhpCsFixer.prototype.getArgs = function (document) {
     let args = ['fix', document.fileName];
 
     if (this.useConfigFile) {
-        const configFilePath = vscode.workspace.rootPath + '/' + this.configFile;
+        const configFilePath = path.join(vscode.workspace.rootPath, this.configFile);
 
         if (fs.existsSync(configFilePath)) {
             args.push('--config=' + configFilePath);
@@ -84,6 +85,8 @@ function activate(context) {
     }));
 
     phpCsFixer.loadConfig();
+
+    vscode.commands.registerTextEditorCommand
 
     vscode.commands.registerTextEditorCommand('simple-php-cs-fixer.fix', (textEditor) => {
         phpCsFixer.fix(textEditor.document);
