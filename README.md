@@ -25,6 +25,14 @@ Run the fixer on save?
 
 `"simple-php-cs-fixer.save": false`
 
+Whether php-cs-fixer should be using a cache
+
+`"simple-php-cs-fixer.usingCache": false`
+
+A comma separated list of rules to be used by php-cs-fixer
+
+`"simple-php-cs-fixer.rules": "@PSR1,@PSR2,trailing_comma_in_multiline_array"`
+
 ---
 
 \- Enjoy!
