@@ -38,7 +38,7 @@
                 "simple-php-cs-fixer.useConfig": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Weather or not to use a custom config file"
+                    "description": "Whether to use a custom config file"
                 },
                 "simple-php-cs-fixer.config": {
                     "type": "string",
@@ -49,6 +49,16 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Run PHP CS Fixer on save"
+                },
+                "simple-php-cs-fixer.usingCache": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to use the php-cs-fixer cache"
+                },
+                "simple-php-cs-fixer.rules": {
+                    "type": "string",
+                    "default": "",
+                    "description": "A comma separated list of rules php-cs-fixer will apply using the --rules option"
                 }
             }
         }

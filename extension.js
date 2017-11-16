@@ -32,6 +32,14 @@ PhpCsFixer.prototype.getArgs = function (document) {
         }
     }
 
+    if (!this.usingCache) {
+        args.push('--using-cache=no');
+    }
+
+    if (this.rules) {
+        args.push('--rules=' + this.rules)
+    }
+
     return args;
 }
 
@@ -66,6 +74,8 @@ PhpCsFixer.prototype.loadConfig = function () {
     this.useConfigFile = config.get('useConfig');
     this.configFile = config.get('config');
     this.runOnSave = config.get('save');
+    this.usingCache = config.get('usingCache');
+    this.rules = config.get('rules');
 
     if (this.runOnSave && ! willFixOnSave) {
         willFixOnSave = vscode.workspace.onDidSaveTextDocument(document => {
