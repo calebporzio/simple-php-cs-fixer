@@ -23,7 +23,11 @@ The path to that config file. (relative to the project root)
 
 Run the fixer on save?
 
-`"simple-php-cs-fixer.save": false`
+`"simple-php-cs-fixer.save": true`
+
+Run the fixer on save, only for projects which have your configuration file present on the project root?
+
+`"simple-php-cs-fixer.save": "auto"` (This requires a value to be present for the `"simple-php-cs-fixer.config"` option)
 
 Whether php-cs-fixer should be using a cache
 

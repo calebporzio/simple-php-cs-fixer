@@ -7,7 +7,7 @@
         "color": "#f0f1f6",
         "theme": "light"
     },
-    "version": "0.1.5",
+    "version": "0.1.6",
     "publisher": "calebporzio",
     "engines": {
         "vscode": "^1.17.0"
@@ -46,7 +46,12 @@
                     "description": "PHP CS Fixer custom config file name"
                 },
                 "simple-php-cs-fixer.save": {
-                    "type": "boolean",
+                    "type": ["boolean", "string"],
+                    "enum": [
+                        true,
+                        false,
+                        "auto"
+                    ],
                     "default": false,
                     "description": "Run PHP CS Fixer on save"
                 },
