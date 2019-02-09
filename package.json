@@ -52,7 +52,7 @@
                 },
                 "simple-php-cs-fixer.usingCache": {
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "Whether to use the php-cs-fixer cache"
                 },
                 "simple-php-cs-fixer.rules": {
