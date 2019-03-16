@@ -46,7 +46,12 @@
                     "description": "PHP CS Fixer custom config file name"
                 },
                 "simple-php-cs-fixer.save": {
-                    "type": "boolean",
+                    "type": ["boolean", "string"],
+                    "enum": [
+                        true,
+                        false,
+                        "auto"
+                    ],
                     "default": false,
                     "description": "Run PHP CS Fixer on save"
                 },

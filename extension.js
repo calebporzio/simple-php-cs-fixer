@@ -5,12 +5,55 @@ const path = require('path');
 
 let willFixOnSave = undefined;
 
+let configFileExists = function(path) {
+    return fs.existsSync(path);
+}
+
+let showError = function(err) {
+    vscode.window.showErrorMessage(err);
+}
+
+let setStatusMessage = function(err, code) {
+    vscode.window.setStatusBarMessage(err, code);
+}
+
 function PhpCsFixer() {
-    //
+   //
+}
+
+PhpCsFixer.prototype.shouldFix = function(document) {
+   if (document.languageId !== 'php') {
+       return false;
+   }
+
+   if (this.runOnSave === 'auto') {
+       if ( ! this.configFile ) {
+           showError(`Simple PHP CS Fixer: 'auto' mode can only be used by specifying a config file.`);
+           return false;
+       }
+
+       if ( configFileExists(this.getConfigFilePath()) ) {
+           return true;
+       }
+
+       return false;
+   } else if (this.runOnSave === true) {
+       return true;
+   }
+
+   return false;
+}
+
+PhpCsFixer.prototype.getConfigFilePath = function() {
+    if (this.configFile) {
+        return path.join(vscode.workspace.rootPath, this.configFile);
+    }
+
+    return false;
 }
 
 PhpCsFixer.prototype.fix = function (document) {
-    if (document.languageId !== 'php') {
+    if ( ! this.shouldFix(document)) {
         return;
     }
 
@@ -23,12 +66,12 @@ PhpCsFixer.prototype.getArgs = function (document) {
     let args = ['fix', document.fileName];
 
     if (this.useConfigFile) {
-        const configFilePath = path.join(vscode.workspace.rootPath, this.configFile);
+        const configFilePath = this.getConfigFilePath();
 
-        if (fs.existsSync(configFilePath)) {
+        if (configFileExists(configFilePath)) {
             args.push('--config=' + configFilePath);
         } else {
-            vscode.window.showErrorMessage(`Simple PHP CS Fixer: Can't find config file: [${this.configFile}]`);
+            showError(`Simple PHP CS Fixer: Can't find config file: [${this.configFile}]`);
         }
     }
 
@@ -51,16 +94,16 @@ PhpCsFixer.prototype.handleProcessOutput = function (process) {
     process.on('close', (code) => {
         let codeHandlers = {
             0: () => {
-                vscode.window.setStatusBarMessage('Simple PHP CS Fixer: Fixed all files!', 2500);
+                setStatusMessage('Simple PHP CS Fixer: Fixed all files!', 2500);
             },
             16: () => {
-                vscode.window.showErrorMessage('Simple PHP CS Fixer: Config error.');
+                showError('Simple PHP CS Fixer: Config error.');
             },
             32: () => {
-                vscode.window.showErrorMessage('Simple PHP CS Fixer: Fixer error.');
+                showError('Simple PHP CS Fixer: Fixer error.');
             },
             'fallback': () => {
-                vscode.window.showErrorMessage('Simple PHP CS Fixer: Unknown error.');
+                showError('Simple PHP CS Fixer: Unknown error.');
             }
         };
 
