@@ -1,6 +1,8 @@
 # simple-php-cs-fixer README
 
-None of the other php-cs-fixer extensions worked the way I wanted them to. I basically want something that runs php-cs-fixer exactly as I would from the command line, but with an option for custom config, and running on save.
+A simple extension for using php-cs-fixer in VS Code.
+
+If no .php_cs.dist file (or other configuration) is found, it will use the default configuration for the Laravel project: https://gist.github.com/laravel-shift/cab527923ed2a109dda047b97d53c200
 
 ![Demo Gif](demo.gif)
 
