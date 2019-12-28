@@ -1,4 +1,4 @@
-# simple-php-cs-fixer README
+# Simple PHP CS Fixer README
 
 A simple extension for using php-cs-fixer in VS Code.
 
