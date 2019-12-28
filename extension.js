@@ -23,15 +23,14 @@ PhpCsFixer.prototype.getArgs = function (document) {
     let args = ['fix', document.fileName];
 
     if (this.useConfigFile) {
-        const configFilePath = path.join(vscode.workspace.rootPath, this.configFile);
-        const fallbackConfigPath = fs.readFileSync(path.resolve(__dirname, '.php_cs.dist'), 'utf8');
+        const configFilePath = path.join(vscode.workspace.workspaceFolders[0].uri.path, this.configFile);
+        const fallbackConfigPath = path.resolve(__dirname, '.php_cs.dist');
 
         if (fs.existsSync(configFilePath)) {
             args.push('--config=' + configFilePath);
         } else if (fs.existsSync(fallbackConfigPath)) {
             args.push('--config=' + fallbackConfigPath)
-        }
-        else {
+        } else {
             vscode.window.showErrorMessage(`Simple PHP CS Fixer: Can't find config file: [${this.configFile}]`);
         }
     }
