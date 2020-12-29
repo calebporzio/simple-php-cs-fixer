@@ -14,7 +14,7 @@ PhpCsFixer.prototype.fix = function (document) {
         return;
     }
 
-    const process = cp.spawn('php-cs-fixer', this.getArgs(document));
+    const process = cp.spawn('php-cs-fixer', this.getArgs(document), {cwd: vscode.workspace.rootPath});
 
     this.handleProcessOutput(process);
 }
