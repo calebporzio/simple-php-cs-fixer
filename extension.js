@@ -14,25 +14,43 @@ PhpCsFixer.prototype.fix = function (document) {
         return;
     }
 
-    const process = cp.spawn('php-cs-fixer', this.getArgs(document));
+    const process = cp.spawn(this.executablePath, this.getArgs(document));
 
     this.handleProcessOutput(process);
 }
 
 PhpCsFixer.prototype.getArgs = function (document) {
-    let args = ['fix', document.fileName];
+    let args = ['fix'];
+    let configFile = '';
+    let documentFile = document.fileName;
+
+    if (this.dockerPath) {
+        documentFile = this.dockerPath
+            ? documentFile.replace(this.hostPath, this.dockerPath)
+            : documentFile;
+    }
+
+    args.push(documentFile);
 
     if (this.useConfigFile) {
         const configFilePath = path.join(vscode.workspace.workspaceFolders[0].uri.path, this.configFile);
         const fallbackConfigPath = path.resolve(__dirname, '.php_cs.dist');
 
         if (fs.existsSync(configFilePath)) {
-            args.push('--config=' + configFilePath);
+            configFile = '--config=' + configFilePath;
         } else if (fs.existsSync(fallbackConfigPath)) {
-            args.push('--config=' + fallbackConfigPath)
+            configFile = '--config=' + fallbackConfigPath;
         } else {
             vscode.window.showErrorMessage(`Simple PHP CS Fixer: Can't find config file: [${this.configFile}]`);
         }
+    }
+
+    if (configFile && configFile.length) {
+        configFile = this.dockerPath
+            ? configFile.replace('--config=' + this.hostPath, '--config=' + this.dockerPath)
+            : configFile;
+
+        args.push(configFile);
     }
 
     if (!this.usingCache) {
@@ -74,13 +92,16 @@ PhpCsFixer.prototype.handleProcessOutput = function (process) {
 PhpCsFixer.prototype.loadConfig = function () {
     const config = vscode.workspace.getConfiguration('simple-php-cs-fixer');
 
+    this.executablePath = config.get('executablePath');
     this.useConfigFile = config.get('useConfig');
     this.configFile = config.get('config');
     this.runOnSave = config.get('save');
     this.usingCache = config.get('usingCache');
     this.rules = config.get('rules');
+    this.hostPath = config.get('hostPath');
+    this.dockerPath = config.get('dockerPath');
 
-    if (this.runOnSave && ! willFixOnSave) {
+    if (this.runOnSave && !willFixOnSave) {
         willFixOnSave = vscode.workspace.onDidSaveTextDocument(document => {
             this.fix(document);
         });
