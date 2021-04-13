@@ -1,78 +1,98 @@
 {
-    "name": "simple-php-cs-fixer",
-    "displayName": "Simple PHP CS Fixer",
-    "description": "A simple way to fire php-cs-fixer with custom config and optionally on save.",
-    "icon": "icon.png",
-    "galleryBanner": {
-        "color": "#f0f1f6",
-        "theme": "light"
-    },
-    "version": "1.0.3",
-    "publisher": "calebporzio",
-    "engines": {
-        "vscode": "^1.17.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/calebporzio/simple-php-cs-fixer.git"
-    },
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "simple-php-cs-fixer.fix",
-                "title": "Simple PHP CS Fixer: fix"
-            }
-        ],
-        "configuration": {
-            "title": "Simple PHP CS Fixer Config",
-            "type": "object",
-            "properties": {
-                "simple-php-cs-fixer.useConfig": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Whether to use a custom config file"
-                },
-                "simple-php-cs-fixer.config": {
-                    "type": "string",
-                    "default": ".php_cs.dist",
-                    "description": "PHP CS Fixer custom config file name"
-                },
-                "simple-php-cs-fixer.save": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Run PHP CS Fixer on save"
-                },
-                "simple-php-cs-fixer.usingCache": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Whether to use the php-cs-fixer cache"
-                },
-                "simple-php-cs-fixer.rules": {
-                    "type": "string",
-                    "default": "",
-                    "description": "A comma separated list of rules php-cs-fixer will apply using the --rules option"
-                }
-            }
-        }
-    },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.48",
-        "@types/node": "^7.10.9",
-        "eslint": "^4.19.1",
-        "mocha": "^6.2.2",
-        "typescript": "^2.9.2",
-        "vscode": "^1.1.36"
-    }
+	"name": "simple-php-cs-fixer",
+	"displayName": "Simple PHP CS Fixer",
+	"description": "A simple way to fire php-cs-fixer with custom config and optionally on save.",
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#f0f1f6",
+		"theme": "light"
+	},
+	"version": "1.0.3",
+	"publisher": "calebporzio",
+	"engines": {
+		"vscode": "^1.17.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/calebporzio/simple-php-cs-fixer.git"
+	},
+	"categories": [
+		"Linters",
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "simple-php-cs-fixer.fix",
+				"title": "Simple PHP CS Fixer: fix"
+			}
+		],
+		"configuration": {
+			"title": "Simple PHP CS Fixer Config",
+			"type": "object",
+			"properties": {
+				"simple-php-cs-fixer.executablePath": {
+					"type": "string",
+					"default": "php-cs-fixer",
+					"description": "The path to your php-cs-fixer, which could be a script that exposes this via docker exec."
+				},
+				"simple-php-cs-fixer.useConfig": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to use a custom config file"
+				},
+				"simple-php-cs-fixer.config": {
+					"type": "string",
+					"default": ".php_cs.dist",
+					"description": "PHP CS Fixer custom config file name"
+				},
+				"simple-php-cs-fixer.hostPath": {
+					"type": "string",
+					"default": "",
+					"description": "This is your project path from your host machine - use in combination with dockerPath to 'replace' filename path."
+				},
+				"simple-php-cs-fixer.dockerPath": {
+					"type": "string",
+					"default": "",
+					"description": "This is your project path from within your container"
+				},
+				"simple-php-cs-fixer.save": {
+					"type": "boolean",
+					"default": false,
+					"description": "Run PHP CS Fixer on save"
+				},
+				"simple-php-cs-fixer.usingCache": {
+					"type": "boolean",
+					"default": false,
+					"description": "Whether to use the php-cs-fixer cache"
+				},
+				"simple-php-cs-fixer.rules": {
+					"type": "string",
+					"default": "",
+					"description": "A comma separated list of rules php-cs-fixer will apply using the --rules option"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^2.2.48",
+		"@types/node": "^7.10.9",
+		"eslint": "^4.19.1",
+		"mocha": "^6.2.2",
+		"typescript": "^2.9.2",
+		"vscode": "^1.1.36"
+	},
+	"__metadata": {
+		"id": "7b273093-b24a-4814-b10d-1d272e2b37ba",
+		"publisherId": "a2487481-f6cb-4f67-9340-4db67a69d30d",
+		"publisherDisplayName": "calebporzio"
+	}
 }
