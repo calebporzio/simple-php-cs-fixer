@@ -2,7 +2,7 @@
 
 A simple extension for using php-cs-fixer in VS Code.
 
-If no .php_cs.dist file (or other configuration) is found, it will use the default configuration for the Laravel project: https://gist.github.com/laravel-shift/cab527923ed2a109dda047b97d53c200
+If no `.php-cs-fixer.dist.php` file (or other configuration) is found, it will use the default configuration for the Laravel project: https://gist.github.com/laravel-shift/cab527923ed2a109dda047b97d53c200
 
 ![Demo Gif](demo.gif)
 
@@ -21,7 +21,7 @@ Look for a custom project specific config file?
 
 The path to that config file. (relative to the project root)
 
-`"simple-php-cs-fixer.config": ".php_cs.dist"`
+`"simple-php-cs-fixer.config": ".php-cs-fixer.dist.php"`
 
 Run the fixer on save?
 

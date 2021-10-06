@@ -24,7 +24,7 @@ PhpCsFixer.prototype.getArgs = function (document) {
 
     if (this.useConfigFile) {
         const configFilePath = path.join(vscode.workspace.workspaceFolders[0].uri.path, this.configFile);
-        const fallbackConfigPath = path.resolve(__dirname, '.php_cs.dist');
+        const fallbackConfigPath = path.resolve(__dirname, '.php-cs-fixer.dist.php');
 
         if (fs.existsSync(configFilePath)) {
             args.push('--config=' + configFilePath);

@@ -42,7 +42,7 @@
                 },
                 "simple-php-cs-fixer.config": {
                     "type": "string",
-                    "default": ".php_cs.dist",
+                    "default": ".php-cs-fixer.dist.php",
                     "description": "PHP CS Fixer custom config file name"
                 },
                 "simple-php-cs-fixer.save": {
