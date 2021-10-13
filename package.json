@@ -37,7 +37,7 @@
             "properties": {
                 "simple-php-cs-fixer.useConfig": {
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "Whether to use a custom config file"
                 },
                 "simple-php-cs-fixer.config": {
