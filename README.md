@@ -15,6 +15,11 @@ If no .php_cs.dist file (or other configuration) is found, it will use the defau
 
 ## Config:
 
+Override the path to the `php-cs-fixer` executable file. This path can be 
+absolue or relative to the current projects root directory.
+
+`"simple-php-cs-fixer.executablePath": "php-cs-fixer"`
+
 Look for a custom project specific config file?
 
 `"simple-php-cs-fixer.useConfig": true`
