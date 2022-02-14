@@ -35,6 +35,11 @@
             "title": "Simple PHP CS Fixer Config",
             "type": "object",
             "properties": {
+                "simple-php-cs-fixer.executablePath": {
+                    "type": "string",
+                    "default": "php-cs-fixer",
+                    "description": "Path to the php-cs-fixer executable file. Can be absolue or relative to the root project directory"
+                },
                 "simple-php-cs-fixer.useConfig": {
                     "type": "boolean",
                     "default": false,
