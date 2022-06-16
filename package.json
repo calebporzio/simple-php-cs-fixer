@@ -59,6 +59,12 @@
                     "type": "string",
                     "default": "",
                     "description": "A comma separated list of rules php-cs-fixer will apply using the --rules option"
+                },
+                "simple-php-cs-fixer.allowRisky": {
+                    "type": "string",
+                    "default": "no",
+                    "enum": ["yes", "no"],
+                    "description": "Allows you to set whether risky rules may run"
                 }
             }
         }
