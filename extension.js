@@ -43,6 +43,10 @@ PhpCsFixer.prototype.getArgs = function (document) {
         args.push('--rules=' + this.rules)
     }
 
+    if (this.allowRisky) {
+        args.push('--allow-risky=' + this.allowRisky)
+    }
+
     return args;
 }
 
@@ -79,6 +83,7 @@ PhpCsFixer.prototype.loadConfig = function () {
     this.runOnSave = config.get('save');
     this.usingCache = config.get('usingCache');
     this.rules = config.get('rules');
+    this.allowRisky = config.get('allowRisky');
 
     if (this.runOnSave && ! willFixOnSave) {
         willFixOnSave = vscode.workspace.onDidSaveTextDocument(document => {
